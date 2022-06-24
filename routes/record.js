@@ -9,15 +9,22 @@ const multer = Multer({
     fileSize: 5 * 1024 * 1024
 })
 
-const { dbHost, dbUser, dbName, dbPassword } = require("../config/gcp-conf");
+const { dbHost, dbUser, dbName, dbPassword, dbSocketPath } = require("../config/gcp-conf");
 
 // TODO: Sesuaikan konfigurasi database
+// const connection = mysql.createConnection({
+//     host: dbHost,
+//     user: dbUser,
+//     database: dbName,
+//     password: dbPassword,
+// })
 const connection = mysql.createConnection({
-    host: dbHost,
     user: dbUser,
     database: dbName,
     password: dbPassword,
+    socketPath: dbSocketPath
 })
+connection.connect()
 
 router.get("/dashboard", (req, res) => {
     const query = "select (select count(*) from records where month(records.date) = month(now()) AND year(records.date) = year(now())) as month_records, (select sum(amount) from records) as total_amount;"
