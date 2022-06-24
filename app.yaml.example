@@ -1,2 +1,9 @@
 runtime: nodejs16
 service: backend
+env_variables:
+  PROJECT_ID: your-project-id
+  BUCKET_NAME: your-bucket-name
+  DB_HOST: your-db-host
+  DB_NAME: your-db-name
+  DB_USER: your-db-user
+  DB_PASSWORD: your-db-password
